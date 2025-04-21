@@ -10,7 +10,7 @@ import lombok.Data;
 @Entity
 public class Recipe {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String name;
     String description;

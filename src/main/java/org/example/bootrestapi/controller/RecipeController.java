@@ -1,10 +1,9 @@
 package org.example.bootrestapi.controller;
 
+import org.example.bootrestapi.model.dto.RecipeDTO;
 import org.example.bootrestapi.model.entity.Recipe;
 import org.example.bootrestapi.service.RecipeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,10 +19,15 @@ public class RecipeController {
 
     @GetMapping
     public List<Recipe> getAllRecipes() {
-        Recipe recipe = new Recipe();
-        recipe.setName("커리");
-        recipe.setDescription("맛있는 커리");
-        recipeService.save(new Recipe());
+
         return recipeService.findAll();
+    }
+
+    @PostMapping
+    public Recipe addRecipe(@RequestBody RecipeDTO dto) {
+        Recipe recipe = new Recipe();
+        recipe.setName(dto.name());
+        recipe.setDescription(dto.description());
+        return recipeService.save(recipe);
     }
 }
